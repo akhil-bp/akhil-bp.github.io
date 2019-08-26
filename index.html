@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="flowplayer.quality-selector.css">
+        <link rel="stylesheet" href="skin.css">
+        <script src="flowplayer.min.js"></script>
+        <script src="flowplayer.vod-quality-selector.min.js"></script>
+        <script src="flowplayertokens.js"></script>
+        <script src="hls.min.js"></script>
+    <style>
+        #player{
+            height:500px;
+        }
+    </style>
+    </head>
+<body>
+
+    <h1>player</h1>
+
+    <div id="player">#player</div>
+
+    <script>
+        // function flowplayer(api, root) {
+        //     console.log(api,"________", root)
+        //     var fsbutton = root.querySelector(".fp-fullscreen");
+        //     // append fullscreen button after HD menu is added on ready
+        //     api.on("ready", function () {
+        //         root.querySelector(".fp-controls").appendChild(fsbutton);
+        //     });
+        // };
+        async function  init(){
+            await TGN.fetchTokens()
+            var player = flowplayer("#player", {
+                embed: false,
+                hlsQualities: true,
+                seekable: true,
+                clip: {
+                    sources: [
+                    { type: "application/x-mpegurl", src: 'https://0zf9n6n7qh.execute-api.us-east-1.amazonaws.com/dev/researchakhil/db23d7ad42ffaf5eb1f7d7fcd1765340/db23d7ad42ffaf5eb1f7d7fcd1765340.m3u8?token='+(TGN.tokens.pop())+'&uid='+(TGN.uid) }
+                        // { type: "application/x-mpegurl", src: 'http://localhost:3000/db23d7ad42ffaf5eb1f7d7fcd1765340/db23d7ad42ffaf5eb1f7d7fcd1765340.m3u8' }
+                    ],
+                    qualities: ['240p', '360p', '480p', '720p', '1080p'],
+                    defaultQuality: '480p'
+                }
+            })
+        }
+        init()
+    </script>
+
+</body>
+
+</html>
