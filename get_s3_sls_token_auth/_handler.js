@@ -2,7 +2,8 @@
 const redis = require('redis');
 const nanoid = require('nanoid');
 
-
+var btoa = require('btoa');
+var hgh = btoa('ffffffff')
 var client;
 
 function connectHandler(e) {
@@ -99,7 +100,7 @@ exports.gettoken = async (event) => {
     console.log("here")
     const DEFAULTCOUNT = 20;
     try {
-
+        var encoded_tokens = ''
         var tokens = [];
         var count = parseInt(event.queryStringParameters.count);
         count = isNaN(count) ? DEFAULTCOUNT : count;
@@ -108,7 +109,12 @@ exports.gettoken = async (event) => {
         if (!userId) { throw new Error("Missing parameters") }
 
         for (let i = 0; i < count; i++) {
-            tokens.push(nanoid());
+            // tokens.push(nanoid());
+           let add_j =  nanoid().replace(/a/g,'j');//convert all a to j
+           let remove_j =  add_j.replace(/j/g,'a');//convert all j to a
+           tokens.push(remove_j); 
+            encoded_tokens = encoded_tokens + add_j + '/';
+            
         }
         if (!client) {
             client = redis.createClient({
@@ -145,7 +151,7 @@ exports.gettoken = async (event) => {
                 'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "*"
             },
-            body: JSON.stringify({ success: true, data: { tokens, count } }, null, 2),
+            body: JSON.stringify({ success: true,data:btoa(encoded_tokens),hh:hgh ,count:count}),
         };
 
     } catch (err) {
