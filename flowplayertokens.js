@@ -122,7 +122,7 @@ TokenGenerator.prototype.fetchTokens = function () {
               var result = JSON.parse(httpRequest.responseText);
               if (result.success) {
                 let responseText = JSON.parse(httpRequest.responseText)
-                var myPassword = "bhgjkkjdsfjhfkdfhdk";
+                var myPassword = "akhilpassword";
                 let res = responseText.analytics.split(')')
                 res.forEach(element => {
                   console.log(element)
