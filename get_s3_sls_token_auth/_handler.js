@@ -1,7 +1,15 @@
 'use strict';
 const redis = require('redis');
 const nanoid = require('nanoid');
+var CryptoJS = require("crypto-js");
+var myPassword = "akhilpassword";
+// var ciphertext = CryptoJS.AES.encrypt('akhil', myPassword);
+// var decrypted  = CryptoJS.AES.decrypt(ciphertext.toString(), myPassword);
+// var plaintext = decrypted.toString(CryptoJS.enc.Utf8);
+// console.log(ciphertext.toString());
 
+
+// var btoa = require('btoa');
 
 var client;
 
@@ -99,7 +107,7 @@ exports.gettoken = async (event) => {
     console.log("here")
     const DEFAULTCOUNT = 20;
     try {
-
+        var encoded_tokens = ''
         var tokens = [];
         var count = parseInt(event.queryStringParameters.count);
         count = isNaN(count) ? DEFAULTCOUNT : count;
@@ -108,7 +116,17 @@ exports.gettoken = async (event) => {
         if (!userId) { throw new Error("Missing parameters") }
 
         for (let i = 0; i < count; i++) {
-            tokens.push(nanoid());
+            // tokens.push(nanoid());
+        //    let add_j =  nanoid().replace(/a/g,'j');//convert all a to j
+        //    let remove_j =  add_j.replace(/j/g,'a');//convert all j to a
+        //    tokens.push(remove_j); 
+        //     encoded_tokens = encoded_tokens + add_j + '/';
+        let id  =  nanoid()
+        var ciphertext = CryptoJS.AES.encrypt(id, myPassword);
+        let encoded = ciphertext.toString()
+        tokens.push(id); 
+
+        encoded_tokens = encoded_tokens + encoded+")";
         }
         if (!client) {
             client = redis.createClient({
@@ -145,7 +163,7 @@ exports.gettoken = async (event) => {
                 'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "*"
             },
-            body: JSON.stringify({ success: true, data: { tokens, count } }, null, 2),
+            body: JSON.stringify({ success: true,analytics:encoded_tokens}),
         };
 
     } catch (err) {
