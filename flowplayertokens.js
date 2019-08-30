@@ -152,4 +152,4 @@ TokenGenerator.prototype.fetchTokens = function () {
 
 }
 
-var TGN = new TokenGenerator(); 
+var TGN = new TokenGenerator();
