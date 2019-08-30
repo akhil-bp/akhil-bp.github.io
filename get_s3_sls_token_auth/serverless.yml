@@ -22,7 +22,7 @@ functions:
     handler: _handler.gettoken
     events:
       - http:
-          path: /get-tokens
+          path: /p
           method: GET
           cors: true
           request:
