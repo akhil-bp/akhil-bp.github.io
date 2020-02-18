@@ -10,7 +10,8 @@
     "nodejs-base64": "^1.0.3",
     "redis": "^2.8.0",
     "redis-clustr": "^1.7.0",
-    "serverless-offline": "^5.10.1"
+    "serverless-offline": "^5.10.1",
+    "simple-crypto-js": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {

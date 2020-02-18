@@ -5,7 +5,7 @@ const redis = require('redis');
 //   port: process.env.CS_REDISPORT
 // });
 const client = redis.createClient({
-    host: "rediselastictutorial.ndqjoi.ng.0001.use1.cache.amazonaws.com",
+    host: "redis-research.ztt9xp.ng.0001.use1.cache.amazonaws.com",
     port: 6379
 });
 client.on('connect', function(result) { console.log("connected to redis server"); })
