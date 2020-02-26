@@ -30,6 +30,18 @@ functions:
               querystrings:
                 url: true
                 count: true
+  UserData:
+    handler: _handler.userData
+    events:
+      - http:
+          path: /user-data
+          method: GET
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                url: true
+                count: true
       # - http:
       #     path: /{proxy+}
       #     method: ANY
