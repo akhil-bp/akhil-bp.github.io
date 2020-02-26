@@ -197,7 +197,7 @@ exports.gettoken = async (event) => {
 
 exports.userData = async (event) => {
     console.log("called get tiken")
-    const DEFAULTCOUNT = 100;
+    const DEFAULTCOUNT = 40;
     const SECONDSPERTOKEN = 180;
     try {
         let tokens = [];
@@ -210,7 +210,7 @@ exports.userData = async (event) => {
         const pad1 = key.slice(0, 3);
         const tstamp = +pad1 % 2 === 0 ? key.slice(3, -3) : key.slice(6);
 
-        if ((Date.now() - parseInt(tstamp)) > 10000) { throw new Error("Missing parameters") }
+        if (Math.abs(Date.now() - parseInt(tstamp)) > 10000) { throw new Error("Missing parameters") }
 
         const privateKey = nanoid(30);
         const privateKeyHex = Buffer.from(privateKey).toString('hex');
