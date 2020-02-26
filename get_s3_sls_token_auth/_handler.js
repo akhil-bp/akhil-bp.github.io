@@ -31,7 +31,7 @@ function errorHandler(e) {
 const generatePolicy = function (principalId, effect, resource) {
     const authResponse = {};
     authResponse.principalId = principalId;
-    authResponse.usageIdentifierKey = 'ebkzOEJTxDN88lgz1Bda2iqZTexSKdU18fYSbJgh';
+    authResponse.usageIdentifierKey = 'avhY6m4EbA41Ur2AWbwjn5NnEDKGeYnp4C3vjXDR';
     if (effect && resource) {
         const policyDocument = {};
         policyDocument.Version = '2012-10-17';

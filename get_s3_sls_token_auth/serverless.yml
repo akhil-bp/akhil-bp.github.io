@@ -4,6 +4,17 @@ service: gettokenwithauth
 provider:
   name: aws
   runtime: nodejs10.x
+  stage: dev
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+  role: arn:aws:iam::290595126969:role/lamdaRedisaccess
+  vpc:
+    securityGroupIds:
+      - sg-0f28b7685516f9d03
+    subnetIds:
+      - subnet-030c62f041193fc88
+      - subnet-0187acf885fe2d73a
 
 functions:
   Auth:
