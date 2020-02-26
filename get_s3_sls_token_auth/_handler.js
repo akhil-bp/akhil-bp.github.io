@@ -31,7 +31,7 @@ function errorHandler(e) {
 const generatePolicy = function (principalId, effect, resource) {
     const authResponse = {};
     authResponse.principalId = principalId;
-    authResponse.usageIdentifierKey = 'ebkzOEJTxDN88lgz1Bda2iqZTexSKdU18fYSbJgh';
+    authResponse.usageIdentifierKey = 'avhY6m4EbA41Ur2AWbwjn5NnEDKGeYnp4C3vjXDR';
     if (effect && resource) {
         const policyDocument = {};
         policyDocument.Version = '2012-10-17';
@@ -197,7 +197,7 @@ exports.gettoken = async (event) => {
 
 exports.userData = async (event) => {
     console.log("called get tiken")
-    const DEFAULTCOUNT = 100;
+    const DEFAULTCOUNT = 40;
     const SECONDSPERTOKEN = 180;
     try {
         let tokens = [];
