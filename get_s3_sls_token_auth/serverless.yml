@@ -20,6 +20,11 @@ provider:
 functions:
   Auth:
     handler: _handler.auth
+    events:
+      - schedule:
+          name: lambda-auth-warmer
+          rate: rate(5 minutes)
+          enabled: true
     # events:
     #   - http:
     #       path: /
@@ -30,18 +35,18 @@ functions:
     #           querystrings:
     #             token: true
     #             uid: true
-  Gettoken:
-    handler: _handler.gettoken
-    events:
-      - http:
-          path: /p
-          method: GET
-          cors: true
-          request:
-            parameters:
-              querystrings:
-                url: true
-                count: true
+  # Gettoken:
+  #   handler: _handler.gettoken
+  #   events:
+  #     - http:
+  #         path: /p
+  #         method: GET
+  #         cors: true
+  #         request:
+  #           parameters:
+  #             querystrings:
+  #               url: true
+  #               count: true
   UserData:
     handler: _handler.userData
     events:
@@ -54,6 +59,10 @@ functions:
               querystrings:
                 url: true
                 count: true
+      - schedule:
+          name: lambda-warmer
+          rate: rate(5 minutes)
+          enabled: true
       # - http:
       #     path: /{proxy+}
       #     method: ANY

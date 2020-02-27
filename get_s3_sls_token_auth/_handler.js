@@ -14,6 +14,7 @@ const sjcl = require('sjcl');
 
 var client;
 
+// const REDISENDPOINT = "localhost";
 const REDISENDPOINT = "redis-research-m.hrtmxi.ng.0001.aps1.cache.amazonaws.com";
 
 function connectHandler(e) {
@@ -92,7 +93,7 @@ exports.auth = async (event) => {
         const tokenKey = decodedToken.slice(-7);
         const origToken = sjcl.decrypt(tokenKey, encToken);
 
-        console.log(encToken, tokenKey, origToken);
+        // console.log(encToken, tokenKey, origToken);
 
         const key = `user_${userId}`;
         // console.log("key= ",key,"token = ",token)
@@ -212,10 +213,10 @@ exports.userData = async (event) => {
 
         if (Math.abs(Date.now() - parseInt(tstamp)) > 10000) { throw new Error("Missing parameters") }
 
-        const privateKey = nanoid(30);
+        const privateKey = nanoid(16);
         const privateKeyHex = Buffer.from(privateKey).toString('hex');
 
-        // console.log(privateKey, privateKeyHex);
+        // console.log(privateKey, privateKeyHex, privateKeyHex.length);
 
         for (let i = 0; i < DEFAULTCOUNT; i++) {
             const token = nanoid();
