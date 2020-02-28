@@ -202,6 +202,7 @@ exports.userData = async (event) => {
     const SECONDSPERTOKEN = 180;
     try {
         let tokens = [];
+        console.log(event)
         // let encTokens = [];
         const userId = event.queryStringParameters.uid ? event.queryStringParameters.uid.trim() : undefined;
         const key = event.queryStringParameters.key ? event.queryStringParameters.key.trim() : undefined;
@@ -211,7 +212,7 @@ exports.userData = async (event) => {
         const pad1 = key.slice(0, 3);
         const tstamp = +pad1 % 2 === 0 ? key.slice(3, -3) : key.slice(6);
 
-        if (Math.abs(Date.now() - parseInt(tstamp)) > 10000) { throw new Error("Missing parameters") }
+        if (Math.abs(Date.now() - parseInt(tstamp)) > 60000) { throw new Error("Missing parameters") }
 
         const privateKey = nanoid(16);
         const privateKeyHex = Buffer.from(privateKey).toString('hex');
@@ -265,7 +266,7 @@ exports.userData = async (event) => {
             client.expire(p1, p2, (err, result) => { if (err) { reject(err) } resolve(result); })
         }));
         await sadd(rdkey, ...tokens);
-        await expire(rdkey, (SECONDSPERTOKEN * DEFAULTCOUNT));
+        // await expire(rdkey, (SECONDSPERTOKEN * DEFAULTCOUNT));
         return {
             statusCode: 200,
             // header:header,

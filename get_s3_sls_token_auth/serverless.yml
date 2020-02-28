@@ -35,18 +35,18 @@ functions:
     #           querystrings:
     #             token: true
     #             uid: true
-  # Gettoken:
-  #   handler: _handler.gettoken
-  #   events:
-  #     - http:
-  #         path: /p
-  #         method: GET
-  #         cors: true
-  #         request:
-  #           parameters:
-  #             querystrings:
-  #               url: true
-  #               count: true
+  Gettoken:
+    handler: _handler.gettoken
+    events:
+      - http:
+          path: /p
+          method: GET
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                url: true
+                count: true
   UserData:
     handler: _handler.userData
     events:
