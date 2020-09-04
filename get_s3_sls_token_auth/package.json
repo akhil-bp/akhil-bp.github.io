@@ -11,7 +11,7 @@
     "redis": "^2.8.0",
     "redis-clustr": "^1.7.0",
     "serverless-offline": "^5.10.1",
-    "simple-crypto-js": "^2.2.0",
+    "simple-crypto-js": "^2.3.0",
     "sjcl": "^1.0.8"
   },
   "devDependencies": {},
